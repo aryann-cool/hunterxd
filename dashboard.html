@@ -7,27 +7,11 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Watch Ads for Robux</h1>
-
-    <!-- XD Display moved below the heading -->
-    <div id="xdDisplay">
-      XD: <span id="totalXDCoin">0</span>
-    </div>
-
-    <!-- Watch Ad Button -->
-    <button id="watchAdButton" onclick="watchAd()">Watch Ad</button>
-
-    <!-- Spin Wheel Button and Spin Wheel -->
-    <div id="spinWheelContainer" style="display: none;">
-      <button onclick="spinWheel()">Spin for XD</button>
-    </div>
-
-    <!-- Referral Link and Privacy Policy -->
-    <div class="footer">
-      <p>Referral Link: <a href="https://www.example.com">www.example.com</a></p>
-      <p><a href="privacy-policy.html">Privacy Policy</a></p>
-    </div>
+  <div class="container" id="dashboard">
+    <h2>Welcome, <span id="username"></span></h2>
+    <button id="watch-ads">Watch Ads</button>
+    <p>Ads Watched: <span id="ads-watched">0</span></p>
+    <button id="redeem-btn">Redeem</button>
   </div>
 
   <script type="module">
@@ -48,47 +32,40 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
-    let userId;
+    // Watch ads function
+    window.onload = function () {
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          document.getElementById('username').innerText = user.displayName || 'User';
+          const userRef = doc(db, "users", user.uid);
+          const docSnap = await getDoc(userRef);
+          
+          if (docSnap.exists()) {
+            const userData = docSnap.data();
+            document.getElementById('ads-watched').innerText = userData.adsWatched || 0;
+          }
+        }
+      });
 
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        userId = user.uid;
-        loadDashboardData();
-      } else {
-        window.location.href = "login.html";
-      }
-    });
+      document.getElementById('watch-ads').addEventListener('click', async () => {
+        const user = auth.currentUser;
+        if (user) {
+          const userRef = doc(db, "users", user.uid);
+          const docSnap = await getDoc(userRef);
+          
+          if (docSnap.exists()) {
+            const userData = docSnap.data();
+            const adsWatched = userData.adsWatched || 0;
+            await setDoc(userRef, { adsWatched: adsWatched + 1 }, { merge: true });
+            document.getElementById('ads-watched').innerText = adsWatched + 1;
+          }
+        }
+      });
 
-    async function loadDashboardData() {
-      const docRef = doc(db, "users", userId);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        const data = docSnap.data();
-        document.getElementById("totalXDCoin").innerText = data.xd || 0;
-      } else {
-        await setDoc(doc(db, "users", userId), { xd: 0 });
-      }
-    }
-
-    async function watchAd() {
-      setTimeout(() => {
-        alert("Ad watched! You can now spin the wheel.");
-        document.getElementById("watchAdButton").style.display = "none";
-        document.getElementById("spinWheelContainer").style.display = "block";
-      }, 2000);
-    }
-
-    function spinWheel() {
-      const xdRewards = [10, 2, 25, 7, 50];
-      const reward = xdRewards[Math.floor(Math.random() * xdRewards.length)];
-
-      const docRef = doc(db, "users", userId);
-      setDoc(docRef, { xd: reward }, { merge: true });
-
-      alert(`You won ${reward} XD!`);
-      document.getElementById("spinWheelContainer").style.display = "none";
-      document.getElementById("watchAdButton").style.display = "block";
-    }
+      document.getElementById('redeem-btn').addEventListener('click', () => {
+        alert('Redemption successful! You will be notified soon.');
+      });
+    };
   </script>
 </body>
 </html>

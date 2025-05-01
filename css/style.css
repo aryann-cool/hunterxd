@@ -60,17 +60,16 @@ h1, h2, h3 {
   margin-top: 20px;
 }
 
-#spinWheelContainer {
+/* Dashboard Styles */
+#dashboard {
   margin-top: 20px;
 }
 
-#spinWheelContainer button {
+#watch-ads {
   background-color: #03dac6;
-  padding: 10px 20px;
-  font-size: 18px;
 }
 
-#spinWheelContainer button:hover {
+#watch-ads:hover {
   background-color: #018786;
 }
 
