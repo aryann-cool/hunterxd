@@ -1,20 +1,19 @@
+  
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | HunterXD</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <div class="container">
-    <h2>Login</h2>
-    <input type="email" id="email" placeholder="Email" required>
-    <input type="password" id="password" placeholder="Password" required>
-    <button onclick="login()">Login</button>
-
-    <!-- Google Login Button -->
-    <button id="googleLogin" onclick="googleLogin()">Login with Google</button>
+<body class="bg-gray-900 text-white flex items-center justify-center h-screen">
+  <div class="bg-gray-800 p-8 rounded-xl shadow-md w-full max-w-md space-y-6">
+    <h2 class="text-2xl font-bold text-center">Login to HunterXD</h2>
+    <input id="email" type="email" placeholder="Email" class="w-full p-3 rounded bg-gray-700 text-white" />
+    <input id="password" type="password" placeholder="Password" class="w-full p-3 rounded bg-gray-700 text-white" />
+    <button onclick="login()" class="w-full bg-blue-500 hover:bg-blue-600 p-3 rounded font-bold">Login</button>
+    <p class="text-center text-sm">Don't have an account? <a href="signup.html" class="text-blue-400 hover:underline">Sign up</a></p>
   </div>
 
   <script type="module">
