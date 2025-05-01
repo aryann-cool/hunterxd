@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Create Account</h2>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button onclick="signUp()">Sign Up</button>
+    <button onclick="googleSignUp()">Sign Up with Google</button>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+    const firebaseConfig = {
+      apiKey: "AIzaSyBKeYHm2cFGD_JaXywCTpLykk_Fx8yRy9Y",
+      authDomain: "adsweb-ae132.firebaseapp.com",
+      projectId: "adsweb-ae132",
+      storageBucket: "adsweb-ae132.appspot.com",
+      messagingSenderId: "1066730758776",
+      appId: "1:1066730758776:web:f8c3f374cfcd1c42a9c38d"
+    };
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    window.signUp = async function () {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      try {
+        await createUserWithEmailAndPassword(auth, email, password);
+        alert("Signup successful");
+        window.location.href = "login.html";
+      } catch (err) {
+        alert(err.message);
+      }
+    };
+
+    window.googleSignUp = async function () {
+      try {
+        await signInWithPopup(auth, provider);
+        alert("Google Signup successful");
+        window.location.href = "login.html";
+      } catch (err) {
+        alert(err.message);
+      }
+    };
+  </script>
+</body>
+</html>

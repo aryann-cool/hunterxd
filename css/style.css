@@ -1,0 +1,85 @@
+/* General Styles */
+body {
+  background-color: #121212;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
+
+button {
+  background-color: #6200ea;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 10px 0;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #3700b3;
+}
+
+input {
+  padding: 10px;
+  margin: 10px;
+  width: 80%;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  background-color: #333;
+  color: white;
+}
+
+/* Google Sign In Button Styling */
+#googleLogin {
+  background-color: #4285F4;
+  color: white;
+  border-radius: 5px;
+  width: 250px;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+#googleLogin:hover {
+  background-color: #357ae8;
+}
+
+h1, h2, h3 {
+  color: #e0e0e0;
+}
+
+#xdDisplay {
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+#spinWheelContainer {
+  margin-top: 20px;
+}
+
+#spinWheelContainer button {
+  background-color: #03dac6;
+  padding: 10px 20px;
+  font-size: 18px;
+}
+
+#spinWheelContainer button:hover {
+  background-color: #018786;
+}
+
+/* Footer */
+.footer {
+  font-size: 12px;
+  margin-top: 20px;
+}
+
+.footer p a {
+  color: #03dac6;
+}
